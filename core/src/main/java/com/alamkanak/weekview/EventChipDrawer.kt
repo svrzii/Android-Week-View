@@ -14,6 +14,10 @@ internal class EventChipDrawer(
         Color.parseColor("#757575")
     }
 
+    private val transparentCardBackground: Int by lazy {
+        Color.parseColor("#F7FFFFFF")
+    }
+
     private val backgroundPaint = Paint()
     private val borderPaint = Paint()
 
@@ -31,6 +35,15 @@ internal class EventChipDrawer(
         val isBeingDragged = entity.id == viewState.dragState?.eventId
         updateBackgroundPaint(entity, isBeingDragged, backgroundPaint)
         drawRoundRect(bounds, cornerRadius, cornerRadius, backgroundPaint)
+
+        val boundY = RectF(bounds.left, bounds.top + 8, bounds.right, bounds.bottom)
+
+        val backgroundPaint1 = Paint()
+        backgroundPaint1.color = entity.style.cardTransparentColor ?: transparentCardBackground
+        backgroundPaint1.isAntiAlias = true
+        backgroundPaint1.strokeWidth = 0f
+        backgroundPaint1.style = Paint.Style.FILL
+        drawRoundRect(boundY, cornerRadius, cornerRadius, backgroundPaint1)
 
         val pattern = entity.style.pattern
         if (pattern != null) {
@@ -159,16 +172,11 @@ internal class EventChipDrawer(
         isBeingDragged: Boolean,
         paint: Paint
     ) = with(paint) {
-        color = entity.style.backgroundColor ?: viewState.defaultEventColor
+        color = entity.style.shadowColor ?: viewState.defaultEventColor
         isAntiAlias = true
         strokeWidth = 0f
         style = Paint.Style.FILL
-
-        if (isBeingDragged) {
-            setShadowLayer(12f, 0f, 0f, dragShadow)
-        } else {
-            clearShadowLayer()
-        }
+        setShadowLayer(6f, 0f, 0f, dragShadow)
     }
 
     private fun updateBorderPaint(

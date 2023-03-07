@@ -43,6 +43,8 @@ internal sealed class ResolvedWeekViewEntity {
     data class Style(
         val textColor: Int? = null,
         val backgroundColor: Int? = null,
+        val cardTransparentColor: Int? = null,
+        val shadowColor: Int? = null,
         val pattern: WeekViewEntity.Style.Pattern? = null,
         val borderColor: Int? = null,
         val borderWidth: Int? = null,

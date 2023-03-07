@@ -94,7 +94,7 @@ private class HeaderUpdater(
         dateLabels: List<StaticLayout>
     ) {
         val maximumLayoutHeight = dateLabels.map { it.height.toFloat() }.maxOrNull() ?: 0f
-        viewState.dateLabelHeight = maximumLayoutHeight
+        viewState.dateLabelHeight = 0f
 
         val currentHeaderHeight = viewState.headerHeight
         val newHeaderHeight = viewState.calculateHeaderHeight()
@@ -142,7 +142,7 @@ private class DateLabelsDrawer(
         if (viewState.numberOfVisibleDays > 1) {
             canvas.drawDateLabelInMultiDayView()
         } else {
-            canvas.drawDateLabelInSingleDayView()
+//            canvas.drawDateLabelInSingleDayView()
         }
     }
 
